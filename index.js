@@ -51,6 +51,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     qtyInputs.forEach(input => {
         input.addEventListener('input', updateCart);
-    });
     cashInput.addEventListener('input', calculateChange);
-});
