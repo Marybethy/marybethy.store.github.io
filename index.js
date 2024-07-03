@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function updateCart() {
         let total = 0;
-        let cartText = '';
+        let cartText = ";
 
         qtyInputs.forEach((input, index) => {
             const qty = parseInt(input.value) || 0;
