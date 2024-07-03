@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         price1: 10000.00,
         price2: 12000.00,
         price3: 11500.00,
-        price4: 3500.00,
-        price5: 13000.00,
-        price6: 90000.00,
+        price4: 10000.00,
+        price5: 3500.00,
+        price6: 13000.00,
         price7: 10000.00
     };
 
