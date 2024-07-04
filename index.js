@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         price4: 10000.00,
         price5: 3500.00,
         price6: 13000.00,
-        price7: 10000.00,
+        price7: 10000.00
     };
 
     const qtyInputs = [
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         document.getElementById('qty4'),
         document.getElementById('qty5'),
         document.getElementById('qty6'),
-        document.getElementById('qty7'),
+        document.getElementById('qty7')
     ];
 
     const totalInput = document.getElementById('total');
