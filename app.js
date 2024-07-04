@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         products.forEach(product => {
             const qty = document.getElementById(product.id).value;
             if (qty > 0) {
-                orders += `${product.name} - Quantity: ${qty}, Total: ${(qty * product.price).toFixed(2)}\n`;
+                orders += `${product.name}, Price: ${(qty * product.price).toFixed(2)}\n`;
             }
         });
         cartsTextArea.value = orders;
