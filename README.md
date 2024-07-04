@@ -1,1 +1,0 @@
-# marybethy.store.github.io
