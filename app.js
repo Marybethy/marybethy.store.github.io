@@ -1,56 +1,43 @@
 document.addEventListener("DOMContentLoaded", function() {
     const products = [
-        {id: "product1", qty: "qty1", price: "price1"},
-        {id: "product2", qty: "qty2", price: "price2"},
-        {id: "product3", qty: "qty3", price: "price3"},
-        {id: "product4", qty: "qty4", price: "price4"},
-        {id: "product5", qty: "qty5", price: "price5"},
-        {id: "product6", qty: "qty6", price: "price6"}
+        {id: 1, price: 10000.00},
+        {id: 2, price: 12000.00},
+        {id: 3, price: 11500.00},
+        {id: 4, price: 9000.00},
+        {id: 5, price: 4500.00},
+        {id: 6, price: 13000.00}
     ];
+    
+    const qtyInputs = products.map(product => document.getElementById(`qty${product.id}`));
+    const cartsTextarea = document.getElementById("carts");
+    const totalInput = document.getElementById("total");
+    const cashInput = document.getElementById("cash");
+    const changeInput = document.getElementById("change");
 
-    const carts = document.getElementById("carts");
-    const total = document.getElementById("total");
-    const cash = document.getElementById("cash");
-    const change = document.getElementById("change");
-
-    function addOrder() {
-        carts.textContent = "";
-        let totalPrice = 0;
-
-        products.forEach(product => {
-            const qtyElem = document.getElementById(product.qty);
-            const priceElem = document.getElementById(product.price);
-            const productElem = document.querySelector(`label[for="${product.id}"]`);
-
-            const qty = parseFloat(qtyElem.value) || 0;
-            const price = parseFloat(priceElem.textContent) || 0;
-
+    function calculateTotal() {
+        let total = 0;
+        cartsTextarea.value = "";
+        
+        qtyInputs.forEach((input, index) => {
+            const qty = parseInt(input.value) || 0;
             if (qty > 0) {
-                const order = `${qty} pc/s x ${price} ------ ${productElem.textContent} ------ Php ${(qty * price).toFixed(2)}\n`;
-                carts.textContent += order;
-                totalPrice += qty * price;
+                const product = products[index];
+                const itemTotal = qty * product.price;
+                total += itemTotal;
+                cartsTextarea.value += `Product ${product.id}: ${qty} x ${product.price} = ${itemTotal}\n`;
             }
         });
-
-        total.value = '₱ ' + totalPrice.toFixed(2);
+        
+        totalInput.value = total.toFixed(2);
     }
-
+    
     function calculateChange() {
-        const totalPrice = parseFloat(total.value.replace('₱ ', '')) || 0;
-        const cashTendered = parseFloat(cash.value) || 0;
-
-        if (!isNaN(totalPrice) && !isNaN(cashTendered) && cashTendered >= totalPrice) {
-            const changeAmount = cashTendered - totalPrice;
-            change.value = '₱ ' + changeAmount.toFixed(2);
-        } else {
-            change.value = '';
-        }
+        const total = parseFloat(totalInput.value) || 0;
+        const cash = parseFloat(cashInput.value) || 0;
+        const change = cash - total;
+        changeInput.value = change.toFixed(2);
     }
-
-    products.forEach(product => {
-        const qtyElem = document.getElementById(product.qty);
-        qtyElem.addEventListener("keyup", addOrder);
-    });
-
-    cash.addEventListener("keyup", calculateChange);
+    
+    qtyInputs.forEach(input => input.addEventListener("input", calculateTotal));
+    cashInput.addEventListener("input", calculateChange);
 });
