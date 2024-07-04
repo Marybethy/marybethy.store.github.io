@@ -1,42 +1,56 @@
-document.addEventListener("DOMContentLoaded", function() {
-  const products = [
-    { id: "product1", name: "Nike SB Dunk", price: 10000 },
-    { id: "product2", name: "Air Jordan", price: 12000 },
-    { id: "product3", name: "Air Jordan Tatum", price: 11500 },
-    { id: "product4", name: "Adidas Samba OG", price: 10000 },
-    { id: "product5", name: "Vans Old Skool", price: 3500 },
-    { id: "product6", name: "Air Jordan 1 Elevate Low", price: 13000 },
-    { id: "product7", name: "Jordan", price: 10000 }
-  ];
+document.addEventListener('DOMContentLoaded', (event) => {
+    const prices = {
+        price1: 10000.00,
+        price2: 5000.00,
+        price3: 27000.00,
+        price4: 37000.00,
+        price5: 80000.00,
+        price6: 90000.00,
+        price7: 100000.00
+    };
 
-  function updateCart() {
-    let cartContent = "";
-    let total = 0;
-    
-    products.forEach((product, index) => {
-      const qty = document.getElementById(`qty${index + 1}`).value;
-      if (qty && qty > 0) {
-        const cost = product.price * qty;
-        total += cost;
-        cartContent += `${product.name} x ${qty} = ${cost.toFixed(2)}\n`;
-      }
+    const qtyInputs = [
+        document.getElementById('qty1'),
+        document.getElementById('qty2'),
+        document.getElementById('qty3'),
+        document.getElementById('qty4'),
+        document.getElementById('qty5'),
+        document.getElementById('qty6'),
+        document.getElementById('qty7')
+    ];
+
+    const totalInput = document.getElementById('total');
+    const cashInput = document.getElementById('cash');
+    const changeInput = document.getElementById('change');
+    const cartsTextarea = document.getElementById('carts');
+
+    function updateCart() {
+        let total = 0;
+        let cartText = '';
+
+        qtyInputs.forEach((input, index) => {
+            const qty = parseInt(input.value) || 0;
+            const priceKey = `price${index + 1}`;
+            const productPrice = prices[priceKey];
+            if (qty > 0) {
+                total += qty * productPrice;
+                cartText += `Product ${index + 1} - Quantity: ${qty}, Price: ${(qty * productPrice).toFixed(2)}\n`;
+            }
+        });
+
+        totalInput.value = total.toFixed(2);
+        cartsTextarea.value = cartText.trim();
+    }
+
+    function calculateChange() {
+        const total = parseFloat(totalInput.value) || 0;
+        const cash = parseFloat(cashInput.value) || 0;
+        const change = cash - total;
+        changeInput.value = change.toFixed(2);
+    }
+
+    qtyInputs.forEach(input => {
+        input.addEventListener('input', updateCart);
     });
-
-    document.getElementById("carts").value = cartContent;
-    document.getElementById("total").value = total.toFixed(2);
-    updateChange();
-  }
-
-  function updateChange() {
-    const total = parseFloat(document.getElementById("total").value) || 0;
-    const cash = parseFloat(document.getElementById("cash").value) || 0;
-    const change = cash - total;
-    document.getElementById("change").value = change >= 0 ? change.toFixed(2) : "0.00";
-  }
-
-  products.forEach((product, index) => {
-    document.getElementById(`qty${index + 1}`).addEventListener("input", updateCart);
-  });
-
-  document.getElementById("cash").addEventListener("input", updateChange);
+    cashInput.addEventListener('input', calculateChange);
 });
