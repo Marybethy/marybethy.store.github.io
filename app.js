@@ -55,4 +55,3 @@ document.addEventListener('DOMContentLoaded', () => {
             changeInput.value = '';
         }
     }
-});
