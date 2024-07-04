@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const productPrice = prices[priceKey];
             if (qty > 0) {
                 total += qty * productPrice;
-                cartText += `Product ${index + 1} - Quantity: ${qty}, Price: ${(qty * productPrice).toFixed(2)}\n`;
+                cartText += `Product ${index + 1} - Quantity: ${qty}, Price: ${(qty * productPrice).toFixed(2)}'\n';
             }
         });
 
