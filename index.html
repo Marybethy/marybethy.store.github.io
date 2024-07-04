@@ -23,25 +23,17 @@
         .header h2 {
             margin: 0;
             font-size: 2.5em;
-            background-color: #E6E6FA; /* Lavender background for text */
+            background-color: #FF828B; /*  background for text */
             display: inline-block;
             padding: 0 20px;
             animation: slideIn 5s linear infinite;
         }
-        body
-          animat Lun-name: bgColorChange;
-          animation-duration: 5s;
-       \*animation-Fill-eader forwards*/
-        animation-iteration-counts infinites;
-        animation-delay: 2s;
-        }
-@keyframes bgColorChange {
-
- 0% {background-color: red; }
-25% { background-color: orange: }
-58% {background-color: yellow; }
-75% { background-color: green; }
-100% { background-color: blue; }
+        @keyframes slideIn {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
         }
         .product {
             background-color: #ffffff;
