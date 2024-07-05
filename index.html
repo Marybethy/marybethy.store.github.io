@@ -26,15 +26,14 @@
             background-color: #FF828B; /* very light Red  background for text */
             display: inline-block;
             padding: 0 20px;
-            animation: ZoomIn 1s cubic-bezier(1, 0.01, 0, 0.99);
-        
-            }
+            animation: slideIn 5s linear infinite;
+        }
         @keyframes slideIn {
             0% {
-                transform: scale(0.3);
+                transform: translateX(100%);
             }
             100% {
-                transform: scale(1);
+                transform: translateX(-100%);
             }
         }
         .product {
